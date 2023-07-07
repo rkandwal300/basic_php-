@@ -1,0 +1,18 @@
+{
+    "data" : [
+        {
+            "name"  : "Rahul",
+            "age"   : "21",
+            "Course": "B.tech"
+        },
+        {
+            "name"  : "Balram",
+            "age"   : "24",
+            "Course": "B.tech"
+        },{
+            "name"  : "Rohit",
+            "age"   : "20",
+            "Course": "B.tech"
+        }
+    ]  
+}

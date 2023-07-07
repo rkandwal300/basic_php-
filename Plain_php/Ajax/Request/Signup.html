@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+
+        *{
+            margin  : 0px ;
+            padding : 0px ;
+        }
+        .background{
+            height  : 100vh;
+            width   : 100% ;
+            display : flex;
+            align-items : center;
+            justify-content : center ;
+            overflow: hidden;
+            background:  	rgb(208,208,208) ;
+
+        }
+        .form{
+            height  : 500px;
+            min-width   : 300px ;
+            width   : 100% ;
+            margin-right : 10% ;
+            margin-left  : 10% ;
+            display : flex;
+            align-items : center ;
+            justify-content : flex-start ;
+            flex-direction: column ;
+            border-radius : 7px;
+            padding : 20px ;
+            /* border : 0.5px solid  black ; */
+            box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, 0.2);
+            background : white  ;
+        }
+        .group{
+            width:100% ;
+            display:flex;
+            align-items : center ;
+            justify-content : center  ;
+
+        }
+        .head{
+            width:30% ;
+            font-size: 20px ;
+            font-weight : 300;
+            cursor : pointer ;
+        }
+        .ip{
+            width: 50% ;
+            height:20px ;
+            font-size : 17px ;
+            padding : 4px ;
+            
+        }
+        .error{
+            width:50% ;
+            margin-left: 30% ;
+            height: 30px;
+            color : red ;
+            font-size : 20px ;
+            font-weight : 400 ;
+            margin-top: 10px ;
+            margin-bottom : 20px ;
+        }
+    </style>
+</head>
+<body>
+    <div class='background'  >
+        <form class='form' id="form" > 
+            <div style ='font-size:36px; font-weight: 400; border-bottom:2px solid black ; padding-bottom : 10px; margin-bottom : 30px ; cursor:pointer ; ' > Registration  </div>
+            
+            <!--- fullname --->
+            <div class='group'> 
+                <div class='head'>   Full Name :- </div>
+                <input class='ip' required name = 'uname'  type ="text" placeholder="eg:- shawn michele " />
+            </div>
+
+
+        <!--- password --->
+        <div class='group' > 
+        <div class='head'>   password :- </div>
+                <input class='ip' required  name='password' type ="password" placeholder=" @Rs123xx" />
+            </div>
+
+
+
+
+
+            <div> 
+                
+                <button type = 'submit'  style='padding:10px; border-radius : 20%; border:1px solid gray ; background: blue; color:white; cursor:pointer; box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2) ; margin-right:10px ;  ' > Sign Up</button>
+                
+                <div id="msg"></div>
+        <a href='#' style ='text-decoration:none; ' > already a user . login ?</a>
+        </div>
+
+
+
+        </form>
+    </div>
+</body>
+
+<script type="text/javascript" >
+    $(document).ready(function(){
+
+        $('#form').on('submit' , function(e){
+            e.preventDefault() ;
+
+            $.ajax({
+                url : 'insert.php' ,
+                type:'POST' ,
+                cache : false , 
+                processData : false,
+                // contentType : false ,
+                // data :  new FormData(this),
+                data :  $('#form').serialize(),
+                beforeSend : function () {
+                    $('#msg').text('please wait ');
+                },
+                success : function (resp){
+                    $('.form')[0].reset();
+                    $('#msg').text(resp)
+                    console.log(resp);
+                } ,
+                error:function (resp){
+                    $('#msg').text(resp)
+                } ,
+                complete : function (){
+                    $('#msg').append('task completed ') ;
+                } ,
+            });
+        });
+
+    });
+</script>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <div> 
+        <label for="stu_name">Enter Your Name:</label>
+        <input list="stu_option" id="stu_name" name="stu_name" />
+        
+        <datalist id="stu_option">
+            <!-- <option value="Chocolate"> -->
+
+        </datalist>
+        </div>
+</body>
+
+<script type="text/javascript" >
+    $(document).ready(function(){
+        $('#stu_name').keyup( function(){
+            $.ajax({
+                url  : 'Back.php',
+                type : 'POST'    ,
+                data : { key : $(this).val() },
+                success : function(response ) {
+                    let data = JSON.parse(response) ;
+                    let option= '' ;
+                    console.log('data = ',data) ;
+                    data.map ( function(val) {
+                        option += `<option value= ${val.sname}>`;
+                    }) ;
+                    $("#stu_option").html(option) ;
+                } ,
+                error   : function( xhr , error ) {console.log(xhr,' /n ',error)},
+            })
+        });
+    }) ;
+
+</script>
+</html>

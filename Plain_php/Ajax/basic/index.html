@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn1"> click here </button>
+    <div id="data"></div>
+</body>
+<script type="text/javascript" >
+    $(document).ready(()=>{
+        $('#btn1').click(()=>{
+            $('#data').load('data.php') ;
+        })  ;
+    }) ;
+
+    // $(document).ready(()=>{
+    //     $('#btn1').click(()=>{
+    //         $.getJSON('data.json' , (Resp)=>{
+    //             let Obj = JSON.stringify(Resp);
+    //             $('#data').text(Obj) ;
+    //             //console.log('dat = ',Obj) ;
+    //         }) ;
+    //     })  ;
+    // }) ;
+</script>
+</html>

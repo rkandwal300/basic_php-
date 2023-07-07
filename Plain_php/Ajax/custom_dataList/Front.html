@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+
+        #container{
+            height: 40px;
+            width : 300px ; 
+            margin-left : 10px ;
+            margin-bottom : 5px ;
+        }
+
+        #container > input {
+            height: 40px;
+            width : 300px ; 
+            padding-left : 10px ; 
+            font-size : 18px ;
+            background-color: white;
+        }
+        .list{
+            width : 277px ; 
+            padding: 20px;
+            padding-top : 20px ;
+            margin-left : 10px ;
+            background-color: #8892B0;
+            display : none ;
+        }
+        .list_item{
+            padding-bottom: 7px;
+            padding-left: 7px;
+            border-bottom: 1.5px solid black ;
+            margin-top : 10px ;
+            cursor : pointer ; 
+        }
+
+    </style>
+</head>
+<body>
+    <div id="container"> 
+        <input type = 'text' placeholder="enter your name" id="name" 
+        name ='name' /> 
+    </div>
+
+    <div class="list">     </div>
+
+
+</body>
+<script type="text/javascript" >
+    $(document).ready(function(){
+
+        function display ( value ) {
+            let design = ``;
+            value.map( function (val) {
+                design += `  <div class="list_item"> ${val} </div>`;
+            
+            }) ;
+
+            $('.list').html(design).slideDown();
+            
+        }
+
+        function load_data (key){
+                $.post('data.php',
+                {data : key },
+                function(resp){
+                    let data = JSON.parse(resp) ;
+                    display(data) ;
+                });
+            }
+
+
+        $('#name').keyup(function(){
+            var key = $(this).val().toLowerCase();
+
+            load_data(key) ;
+        }) ;
+
+        $('.list').on('click' , 'div' , function (){
+            let data = $(this).text().trim() ;
+            console.log(' data = ', data ) ;
+            $('#name').val(data) ;
+            $('.list').hide() ;
+        })
+
+
+        
+    })
+</script>
+</html>
